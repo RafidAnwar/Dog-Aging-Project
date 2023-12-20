@@ -9,9 +9,12 @@ print(df.shape)
 
 index_df = df.set_index('dog_id')
 exp_df = index_df.loc[:,
-         ["dd_age_years", 'dd_sex', 'hs_health_conditions_liver', 'dd_weight_lbs', 'dd_breed_pure_or_mixed',
+         ["dd_age_years", 'dd_sex', 'dd_weight_lbs', 'dd_breed_pure_or_mixed',
           'dd_breed_pure', 'dd_spayed_or_neutered', 'df_diet_consistency', 'df_feedings_per_day',
-          'df_daily_supplements_omega3', 'df_primary_diet_component', 'hs_general_health']]
+          'df_daily_supplements_omega3', 'df_primary_diet_component', 'hs_general_health',
+          'hs_health_conditions_gastrointestinal', 'hs_health_conditions_oral', 'hs_health_conditions_orthopedic',
+          'hs_health_conditions_kidney', 'hs_health_conditions_liver', 'hs_health_conditions_cardiac',
+          'hs_health_conditions_skin', 'hs_health_conditions_neurological']]
 print(exp_df.shape)
 
 """#unwanted variables exclusion
@@ -57,7 +60,6 @@ print(hc.shape)
 final = pd.merge(data, hc, on='dog_id', how='inner', copy=True)
 print(final.head())
 print(final.shape)
-
 """#Regression analysis
 
 1. Liver or Pancreas disorders
@@ -119,3 +121,4 @@ conf_interval = np.exp(result.conf_int().iloc[1])
 print(f'Odds Ratio: {odds_ratio:.4f}')
 print(f'Confidence Interval: [{conf_interval[0]:.4f}, {conf_interval[1]:.4f}]')
 print(f'p-value:', result.pvalues.loc['exposure_group'])
+
